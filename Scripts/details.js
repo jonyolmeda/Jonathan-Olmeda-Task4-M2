@@ -1,6 +1,6 @@
 //Asigne la variable al elemto que traigo de HTML.
 
-const tarjetaDetails = document.getElementById(`tarjeta-details`) 
+const tarjetaDetails = document.getElementById(`tarjeta-details`)
 
 //Cree una función para imprimir la tarjeta en la página Details.
 
@@ -8,7 +8,7 @@ function impTarjetaDetails(array, contenedor) {
     array.forEach((e) => {
       contenedor.innerHTML = `
       <div class="container d-flex justify-content-between gap-5">
-    <img class="img-thumbnail img-fluid col-5" src="${e.image}" alt="${e.name}">
+    <img class="imagen col-5" src="${e.image}" alt="${e.name}">
     <div class="text-light">
       <p>Name: ${e.name}</p>
       <p>Date: ${e.date}

@@ -1,4 +1,4 @@
- const currentDate = "2022-01-01" 
+ const currentDate = "2022-01-01"
  const events=[
     {
       _id: 1,

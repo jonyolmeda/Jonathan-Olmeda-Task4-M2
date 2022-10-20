@@ -1,0 +1,8 @@
+.imagen{
+object-fit: cover;
+border-radius: 20px;
+}
+.contenedor{
+border: #414242 solid 5px ;
+border-radius: 20px;
+}
