@@ -1,4 +1,4 @@
-const tarjetas = document.getElementById("contenedor");
+const tarjetas = document.getElementById("contenedor"); 
 const input = document.getElementById("input-texto");
 const checkbox = document.getElementById(`checkbox`);
 
