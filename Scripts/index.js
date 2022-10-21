@@ -66,7 +66,7 @@ let listaChequeada = [];
 
 checkbox.addEventListener(`change`, (e) => {
   if (e.target.checked) {
-    let categoriaCheckbox = e.target.id.toLowerCase()
+    let categoriaCheckbox = e.target.id.toLowerCase();
     listaChequeada = listaChequeada.concat(
       events.filter((evento) =>
         evento.category.toLowerCase().includes(categoriaCheckbox)
@@ -75,22 +75,20 @@ checkbox.addEventListener(`change`, (e) => {
     tarjetas.innerHTML = "";
     imprimir(listaChequeada, tarjetas);
 
-//Junté cada coincidencia con el .concat, extraigo la categoria en minuscula y busco si hay coincidencia entre el Id
-//(también en munúscula) y las categorias recorridas en events; en cada cambio de evento (change) se limpia el contenedor de tarjetas.
-//El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
-
+    //Junté cada coincidencia con el .concat, extraigo la categoria en minuscula y busco si hay coincidencia entre el Id
+    //(también en munúscula) y las categorias recorridas en events; en cada cambio de evento (change) se limpia el contenedor de tarjetas.
+    //El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
   } else if (!e.target.checked) {
     listaChequeada = listaChequeada.filter(
-      (evento) =>
-        !evento.category.toLowerCase().includes(categoriaCheckbox)
+      (evento) => !evento.category.toLowerCase().includes(categoriaCheckbox)
     );
     tarjetas.innerHTML = "";
     imprimir(listaChequeada, tarjetas);
   }
 
-//Cuando se "descheckea" se ejecuta el else if, se filtra los que no coincidan con el Id.
+  //Cuando se "descheckea" se ejecuta el else if, se filtra los que no coincidan con el Id.
 
-//Si la longitud del array es 0 se reimprimen todas las tarjetas.
+  //Si la longitud del array es 0 se reimprimen todas las tarjetas.
 
   if (listaChequeada.length === 0) {
     imprimir(events, tarjetas);

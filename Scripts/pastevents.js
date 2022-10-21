@@ -2,15 +2,16 @@ const tarjetas = document.getElementById("contenedor");
 const input = document.getElementById("input-texto");
 const checkbox = document.getElementById(`checkbox`);
 
-//En este caso creé la variable past para que indique cuales son lar tarjetas a imprimir 
+//En este caso creé la variable past para que indique cuales son lar tarjetas a imprimir
 //usandola de argumento en la fn imprimir.
 
 let past = events.filter((event) => event.date < currentDate);
 
 //Cree una función para imprimir las tarjetas en la página Past events.
-  
+
 function imprimir(array, contenedor) {
-  array.forEach((e) => { {
+  array.forEach((e) => {
+    {
       contenedor.innerHTML += `
   <div class="card col-3 bg-black">
       <div class="card-body">
@@ -82,10 +83,9 @@ checkbox.addEventListener(`change`, (e) => {
     tarjetas.innerHTML = "";
     imprimir(listaChequeadaPU, tarjetas);
 
-//Junté cada coincidencia con el .concat, extraigo la categoria en minuscula y busco si hay coincidencia entre el Id
-//(también en munúscula) y las categorias recorridas en events; en cada cambio de evento (change) se limpia el contenedor de tarjetas.
-//El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
-
+    //Junté cada coincidencia con el .concat, extraigo la categoria en minuscula y busco si hay coincidencia entre el Id
+    //(también en munúscula) y las categorias recorridas en events; en cada cambio de evento (change) se limpia el contenedor de tarjetas.
+    //El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
   } else if (!e.target.checked) {
     listaChequeadaPU = listaChequeadaPU.filter(
       (evento) =>
@@ -95,9 +95,9 @@ checkbox.addEventListener(`change`, (e) => {
     imprimir(listaChequeadaPU, tarjetas);
   }
 
-//Cuando se "descheckea" se ejecuta el else if, se filtra los que no coincidan con el Id.
+  //Cuando se "descheckea" se ejecuta el else if, se filtra los que no coincidan con el Id.
 
-//Si la longitud del array es 0 se reimprimen todas las tarjetas.
+  //Si la longitud del array es 0 se reimprimen todas las tarjetas.
 
   if (listaChequeadaPU.length === 0) {
     imprimir(past, tarjetas);
