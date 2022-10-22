@@ -34,7 +34,7 @@ imprimir(upcoming, tarjetas);
 function notCoincidence(array, contenedor) {
   if (array <= 0) {
     contenedor.innerHTML = `
-    <h2 class="text-muted fs-4 fw-bold">No hay coincidencias</h2>
+    <h2 class="text-muted fs-4 fw-bold">Lo sentimos, no hay coincidencias</h2>
     `;
   }
 }
@@ -79,7 +79,6 @@ checkbox.addEventListener(`change`, (e) => {
         evento.category.toLowerCase().includes(e.target.id.toLowerCase())
       )
     );
-    console.log(listaChequeadaPU);
     tarjetas.innerHTML = "";
     imprimir(listaChequeadaPU, tarjetas);
 
@@ -88,8 +87,7 @@ checkbox.addEventListener(`change`, (e) => {
     //El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
   } else if (!e.target.checked) {
     listaChequeadaPU = listaChequeadaPU.filter(
-      (evento) =>
-        !evento.category.toLowerCase().includes(e.target.id.toLowerCase())
+      (evento) => !evento.category.toLowerCase().includes(e.target.id.toLowerCase())
     );
     tarjetas.innerHTML = "";
     imprimir(listaChequeadaPU, tarjetas);

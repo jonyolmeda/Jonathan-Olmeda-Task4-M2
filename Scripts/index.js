@@ -36,8 +36,9 @@ function noCoincide(array, contenedor) {
 //En última instancia se imprimen las coincidencias.
 
 input.addEventListener(`keyup`, (e) => {
+  let textoIngresado = e.target.value.toLowerCase()
   elementosFiltrados = events.filter((nombres) =>
-    nombres.name.toLowerCase().includes(e.target.value.toLowerCase())
+    nombres.name.toLowerCase().includes(textoIngresado)
   );
   tarjetas.innerHTML = "";
   noCoincide(elementosFiltrados, tarjetas);
@@ -66,10 +67,9 @@ let listaChequeada = [];
 
 checkbox.addEventListener(`change`, (e) => {
   if (e.target.checked) {
-    let categoriaCheckbox = e.target.id.toLowerCase();
     listaChequeada = listaChequeada.concat(
       events.filter((evento) =>
-        evento.category.toLowerCase().includes(categoriaCheckbox)
+        evento.category.toLowerCase().includes(e.target.id.toLowerCase())
       )
     );
     tarjetas.innerHTML = "";
@@ -80,7 +80,7 @@ checkbox.addEventListener(`change`, (e) => {
     //El último paso se ejcuta la fn (que tiene como argumento el array filtrado y el contenedor de tarjetas).
   } else if (!e.target.checked) {
     listaChequeada = listaChequeada.filter(
-      (evento) => !evento.category.toLowerCase().includes(categoriaCheckbox)
+      (evento) => !evento.category.toLowerCase().includes(e.target.id.toLowerCase())
     );
     tarjetas.innerHTML = "";
     imprimir(listaChequeada, tarjetas);
