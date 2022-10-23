@@ -2,13 +2,28 @@ const $tarjetas = document.getElementById("contenedor");
 const $input = document.getElementById("input-texto");
 const $checkbox = document.getElementById(`checkbox`);
 
+let eventos;
+fetch('https://amazing-events.herokuapp.com/api/events')
+    .then( data => data.json())
+    .then( data => {
+      eventos = data.events;
+      crearCheckbox(eventos, $checkbox)
+    })
+.catch( err => console.log(err));
 
-async function fenthEvents(){
-let api = await fetch('https://amazing-events.herokuapp.com/api/events')
-let data = await api.json()
-let eventos = data
+
+function crearCheckbox(array, contenedor) {
+  let fn = e => e.category
+  let categorias = new Set(array.filter(fn).map(fn))
+  categorias.forEach(param => { $checkbox.innerHTML +=
+    `<div class="form-check form-check-inline" id="checkbox">
+    <input class="form-check-input" type="checkbox" id="${param}" value="${param}">
+    <label class="form-check-label text-light" for="${param}">${param}</label>
+  </div>`
+  })
 }
-fenthEvents()
+
+
 
 
 
