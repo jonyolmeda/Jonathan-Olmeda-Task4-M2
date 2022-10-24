@@ -1,8 +1,4 @@
-//Asigne la variable al elemto que traigo de HTML.
-
 const tarjetaDetails = document.getElementById(`tarjeta-details`);
-
-//Cree una función para imprimir la tarjeta en la página Details.
 
 function impTarjetaDetails(array, contenedor) {
     contenedor.innerHTML = `
