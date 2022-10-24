@@ -5,8 +5,8 @@ const $checkbox = document.getElementById(`checkbox`);
 let eventos;
 fetch("https://amazing-events.herokuapp.com/api/events")
   .then((data) => data.json())
-  .then((res) => {
-    eventos = res.events;
+  .then((data) => {
+    eventos = data.events;
     crearCheckbox(eventos, $checkbox);
     imprimirTarjetas(eventos, $tarjetas);
     $input.addEventListener(`keyup`,filtro)
