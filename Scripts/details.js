@@ -25,16 +25,27 @@ function impTarjetaDetails(array, contenedor) {
   });
 }
 
-//En la siguiente fn le asigne un array vacio a la variable eventos, para después filtrar los id y en caso
-//que coincida imprimir la tarjeta correspondiente en pantalla.
+let eventos;
+fetch('https://amazing-events.herokuapp.com/api/events')
+    .then( data => data.json())
+    .then( data => {
+      fecha = data.currentDate
+      eventos = data.events;
+      infoEventos()
+    })
+.catch( err => console.log(err));
+
 
 function infoEventos() {
   let eventos = [];
-
   let id = parseInt(location.search.slice(4));
 
-  eventos = events.filter((element) => element._id === id);
-
+  eventos = events.filter(element => element._id === id);
+ if (eventos.date < fecha) {
+  impTarjetaDetails(eventos, tarjetaDetails);
+ }else{
   impTarjetaDetails(eventos, tarjetaDetails);
 }
+}
+
 infoEventos();

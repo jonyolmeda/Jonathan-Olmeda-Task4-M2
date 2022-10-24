@@ -23,33 +23,35 @@ function crearCheckbox(array, contenedor) {
   })
 }
 
+ function crearTajeta(array) {
 
-
-
-
-
-
-/* function imprimir(array, contenedor) {
-  array.forEach((e) => {
-    contenedor.innerHTML += `
-  <div class="card col-3 bg-black">
+  let div = document.createElement(`DIV`)
+  div.classList = "card col-3 bg-black"
+  div.innerHTML = `
       <div class="card-body">
-          <p class="card-text text-light">${e.name}</p>
+          <p class="card-text text-light">${array.name}</p>
       </div>
-      <img src="${e.image}" alt="${e.name}">
+      <img src="${array.image}" alt="Imagen de ${array.name}">
       <div class="card-body">
           <p class="card-text text-light">${e.description}t.</p>
-          <p class="card-text text-light">Price: $${e.price}</p>
+          <p class="card-text text-light">Price: $${array.price}</p>
       </div>
-      <a href="details.html?id=${e._id}" class="btn btn-danger">Details</a>
+      <a href="details.html?id=${array._id}" class="btn btn-danger">Details</a>
   </div>
-`;
-  });
+`
+return div
+ }
+
+function imprimrTarjetas(array, contenedor) {
+  let fragment = document.createDocumentFragment()
+  array.forEach(evento => fragment.appendChild(crearTajeta(evento)))
+  contenedor.appendChild(fragment)
 }
-imprimir(events, tarjetas);
 
 
-function noCoincide(array, contenedor) {
+
+
+/* function noCoincide(array, contenedor) {
   if (array <= 0) {
     contenedor.innerHTML = `
     <h2 class="text-muted fs-4 fw-bold">Lo sentimos, no hay coincidencias</h2>
