@@ -5,26 +5,25 @@ const tarjetaDetails = document.getElementById(`tarjeta-details`);
 //Cree una función para imprimir la tarjeta en la página Details.
 
 function impTarjetaDetails(array, contenedor) {
-  array.forEach((e) => {
     contenedor.innerHTML = `
       <div class="container d-flex justify-content-between gap-5">
-    <img class="imagen col-5" src="${e.image}" alt="${e.name}">
+    <img class="imagen col-5" src="${array.image}" alt="${array.name}">
     <div class="text-light">
-      <p>Name: ${e.name}</p>
-      <p>Date: ${e.date}
-      <p>Description: ${e.description}</p>
-      <p>Category: ${e.category}</p>
-      <p>Place: ${e.place}</p>
-      <p>Capacity: ${e.capacity}</p>
-      <p>Estimate: ${e.estimate}</p>
-      <p>Assistance: ${e.assistance}</p>
-      <p>Price: $${e.price}</p>
+      <p>Name: ${array.name}</p>
+      <p>Date: ${array.date}
+      <p>Description: ${array.description}</p>
+      <p>Category: ${array.category}</p>
+      <p>Place: ${array.place}</p>
+      <p>Capacity: ${array.capacity}</p>
+      <p>Estimate: ${array.estimate}</p>
+      <p>Assistance: ${array.assistance}</p>
+      <p>Price: $${array.price}</p>
     </div>
   </div>
   `;
-  });
-}
+  };
 
+let fecha
 let eventos;
 fetch('https://amazing-events.herokuapp.com/api/events')
     .then( data => data.json())
@@ -35,17 +34,13 @@ fetch('https://amazing-events.herokuapp.com/api/events')
     })
 .catch( err => console.log(err));
 
-
 function infoEventos() {
-  let eventos = [];
-  let id = parseInt(location.search.slice(4));
-
-  eventos = events.filter(element => element._id === id);
- if (eventos.date < fecha) {
-  impTarjetaDetails(eventos, tarjetaDetails);
+  let arrFiltro = [];
+  let id = location.search.slice(4);
+  arrFiltro = eventos.find(element => element._id === id);
+ if (arrFiltro.date < fecha) {
+  impTarjetaDetails(arrFiltro, tarjetaDetails);
  }else{
-  impTarjetaDetails(eventos, tarjetaDetails);
+  impTarjetaDetails(arrFiltro, tarjetaDetails);
 }
 }
-
-infoEventos();
