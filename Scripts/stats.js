@@ -2,11 +2,11 @@ let $tablas = document.getElementById(`contenedor-tablas`)
 let upcoming;
 let past;
 let fechaActual;
-fetch('https://amazing-events.herokuapp.com/api/events')
+fetch('https://mind-hub.up.railway.app/amazing')
     .then( data => data.json())
     .then( data => {
       let eventos = data.events;
-      fechaActual = data.currentDate
+      fechaActual = data.date
       upcoming = eventos.filter((objeto) => objeto.date > fechaActual);
       past = eventos.filter((objeto) => objeto.date < fechaActual);
       funcionamientoTabla1()
@@ -50,7 +50,37 @@ let mayorCapacidad = capacidadOrdenada[capacidadOrdenada.length - 1];
 tabla1($tablas,menorAsistencia,mayorAsistencia,mayorCapacidad);
 }
 
-
+function tabla2(contenedor) {
+  contenedor.innerHTML +=`<table class="table">
+    <thead class="thead-black text-bg-dark">
+      <tr>
+        <th>Upcoming events statistics by category</th>
+      </tr>
+    </thead>
+    <tbody class="bg-light col-4">
+      <tr>
+        <td class="col-4">Categories</td>
+        <td class="col-4">Revenues</td>
+        <td class="col-4">Porcentage of attendance</td>
+      </tr>
+      <tr>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+      </tr>
+      <tr>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+      </tr>
+      <tr>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+        <td class="col-4"></td>
+      </tr>
+    </tbody>
+  </table>`
+}
 
 
 

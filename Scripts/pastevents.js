@@ -5,11 +5,12 @@ const $checkbox = document.getElementById(`checkbox`);
 let past;
 let hoy;
 let eventos;
-fetch("https://amazing-events.herokuapp.com/api/events")
+fetch("https://mind-hub.up.railway.app/amazing")
   .then((data) => data.json())
   .then((data) => {
     eventos = data.events;
-    hoy = data.currentDate
+    console.log(eventos);
+    hoy = data.date
     past = eventos.filter((e) => e.date < hoy);
     crearCheckbox(past, $checkbox);
     imprimirTarjetas(past, $tarjetas);
@@ -17,7 +18,6 @@ fetch("https://amazing-events.herokuapp.com/api/events")
     $checkbox.addEventListener(`change`, filtro)
   })
   .catch((err) => console.log(err));
-console.log(past);
 function crearCheckbox(array, contenedor) {
   let fn = (e) => e.category;
   let categorias = new Set(array.filter(fn).map(fn));
@@ -41,7 +41,7 @@ function crearTajeta(array) {
           <p class="card-text text-light">${array.description}t.</p>
           <p class="card-text text-light">Price: $${array.price}</p>
       </div>
-      <a href="details.html?id=${array._id}" class="btn btn-danger">Details</a>
+      <a href="details.html?id=${array.id}" class="btn btn-danger">Details</a>
   </div>
 `;
   return div;

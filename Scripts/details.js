@@ -21,10 +21,10 @@ function impTarjetaDetails(array, contenedor) {
 
 let fecha
 let eventos;
-fetch('https://amazing-events.herokuapp.com/api/events')
+fetch('https://mind-hub.up.railway.app/amazing')
     .then( data => data.json())
     .then( data => {
-      fecha = data.currentDate
+      fecha = data.date
       eventos = data.events;
       infoEventos()
     })
@@ -33,7 +33,7 @@ fetch('https://amazing-events.herokuapp.com/api/events')
 function infoEventos() {
   let arrFiltro = [];
   let id = location.search.slice(4);
-  arrFiltro = eventos.find(element => element._id === id);
+  arrFiltro = eventos.find(element => element.id === id);
  if (arrFiltro.date < fecha) {
   impTarjetaDetails(arrFiltro, tarjetaDetails);
  }else{
