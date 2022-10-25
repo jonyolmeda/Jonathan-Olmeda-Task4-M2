@@ -5,11 +5,10 @@ const $checkbox = document.getElementById(`checkbox`);
 let past;
 let hoy;
 let eventos;
-fetch("https://mind-hub.up.railway.app/amazing")
-  .then((data) => data.json())
-  .then((data) => {
+fetch('https://mh-amazing.herokuapp.com/amazing')
+  .then(data => data.json())
+  .then(data => {
     eventos = data.events;
-    console.log(eventos);
     hoy = data.date
     past = eventos.filter((e) => e.date < hoy);
     crearCheckbox(past, $checkbox);

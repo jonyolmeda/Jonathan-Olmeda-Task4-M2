@@ -5,9 +5,9 @@ const $checkbox = document.getElementById(`checkbox`);
 let upcoming;
 let hoy;
 let eventos;
-fetch("https://mind-hub.up.railway.app/amazing")
-  .then((data) => data.json())
-  .then((data) => {
+fetch('https://mh-amazing.herokuapp.com/amazing')
+  .then(data => data.json())
+  .then(data => {
     eventos = data.events;
     hoy = data.date
     upcoming = eventos.filter((e) => e.date > hoy);

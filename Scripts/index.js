@@ -3,9 +3,9 @@ const $input = document.getElementById("input-texto");
 const $checkbox = document.getElementById(`checkbox`);
 
 let eventos;
-fetch("https://mind-hub.up.railway.app/amazing")
-  .then((data) => data.json())
-  .then((data) => {
+fetch('https://mh-amazing.herokuapp.com/amazing')
+  .then(data => data.json())
+  .then(data => {
     eventos = data.events;
     crearCheckbox(eventos, $checkbox);
     imprimirTarjetas(eventos, $tarjetas);

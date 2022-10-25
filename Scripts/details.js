@@ -21,10 +21,10 @@ function impTarjetaDetails(array, contenedor) {
 
 let fecha
 let eventos;
-fetch('https://mind-hub.up.railway.app/amazing')
-    .then( data => data.json())
-    .then( data => {
-      fecha = data.date
+fetch('https://mh-amazing.herokuapp.com/amazing')
+  .then(data => data.json())
+  .then(data => {
+    eventos = data.events;
       eventos = data.events;
       infoEventos()
     })

@@ -1,41 +1,44 @@
-let $tablas = document.getElementById(`contenedor-tablas`)
+let $tablas1 = document.getElementById(`contenedor-tablas1`)
+let $tablas2 = document.getElementById(`contenedor-tablas2`)
+let $tablas3 = document.getElementById(`contenedor-tablas3`)
+
 let upcoming;
 let past;
-let fechaActual;
-fetch('https://mind-hub.up.railway.app/amazing')
-    .then( data => data.json())
-    .then( data => {
-      let eventos = data.events;
-      fechaActual = data.date
-      upcoming = eventos.filter((objeto) => objeto.date > fechaActual);
-      past = eventos.filter((objeto) => objeto.date < fechaActual);
-      funcionamientoTabla1()
-      //console.log(funcionamientoTabla1());
-    })
-.catch( err => console.log(err));
 
+fetch("https://mh-amazing.herokuapp.com/amazing")
+  .then((data) => data.json())
+  .then((data) => {
+    let eventos = data.events;
+    let hoy = data.date;
+    upcoming = eventos.filter((objeto) => objeto.date > hoy);
+    past = eventos.filter((objeto) => objeto.date < hoy);
+    funcionamientoTabla1();
+    estadisticas(upcoming, 'estimate', $tablas2)
+    estadisticas(past, 'assistance', $tablas3)
+  })
+  .catch((err) => console.log(err));
 
 
 function tabla1(contenedor,e1,e2,e3) {
-  contenedor.innerHTML +=`<table class="table">
-  <thead class="thead-black text-bg-dark">
-    <tr>
-      <th>Events statistics</th>
-    </tr>
-  </thead>
-  <tbody class="bg-light ">
-    <tr>
-      <td class="col-4">Events whit the highest percentage of attendance</td>
-      <td class="col-4">Events whit the lowest percentage of attendance</td>
-      <td class="col-4">Event whit largest capacity</td>
-    </tr>
-    <tr>
-      <td class="col-4">${e1.name}</td>
-      <td class="col-4">${e2.name}</td>
-      <td class="col-4">${e3.name}</td>
-    </tr>
-  </tbody>
-</table>`
+  contenedor.innerHTML +=`
+  <tr>
+  <td>${e1.name}</td> 
+  <td>${e2.name}</td>
+  <td>${e3.name}</td>
+</tr>
+`
+}
+
+function tabla2(array, contenedor) {
+  array.forEach(e => {
+    contenedor.innerHTML +=
+      `<tr>
+          <td>${e.categoria}</td>
+          <td>${e.ganancia}</td>
+          <td>${e.promedio}</td>     
+      </tr>
+      `
+  })
 }
 
 function funcionamientoTabla1() {
@@ -47,53 +50,36 @@ let capacidadOrdenada = [...past].sort((e1, e2) => e1.capacity - e2.capacity);
 let menorAsistencia = asistenciaOrdenada[0];
 let mayorAsistencia = asistenciaOrdenada[asistenciaOrdenada.length - 1];
 let mayorCapacidad = capacidadOrdenada[capacidadOrdenada.length - 1];
-tabla1($tablas,menorAsistencia,mayorAsistencia,mayorCapacidad);
+tabla1($tablas1,menorAsistencia,mayorAsistencia,mayorCapacidad);
 }
 
-function tabla2(contenedor) {
-  contenedor.innerHTML +=`<table class="table">
-    <thead class="thead-black text-bg-dark">
-      <tr>
-        <th>Upcoming events statistics by category</th>
-      </tr>
-    </thead>
-    <tbody class="bg-light col-4">
-      <tr>
-        <td class="col-4">Categories</td>
-        <td class="col-4">Revenues</td>
-        <td class="col-4">Porcentage of attendance</td>
-      </tr>
-      <tr>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-      </tr>
-      <tr>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-      </tr>
-      <tr>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-        <td class="col-4"></td>
-      </tr>
-    </tbody>
-  </table>`
+function estadisticas(fecha, propiedad, contenedor) {
+  fecha.map(evento => {
+    evento.ganancia = evento[propiedad] * evento.price
+  })
+  let categorias = Array.from(new Set(fecha.map(evento => evento.category)))
+  let estadisticas = categorias.map(categoria => {
+    let filtroCat = fecha.filter(evento => evento.category === categoria)
+    return sumaRetorno(filtroCat, propiedad)
+  })
+  tabla2(estadisticas, contenedor)
 }
 
-
-
-
-
-
-
-/* const array1 = [1, 2, 3, 4];
-
-// 0 + 1 + 2 + 3 + 4
-const valorInicial = 0;
-const sumWithInitial = array1.reduce(
-  (previousValue, currentValue) => previousValue + currentValue,
-  initialValue
-);
-console.log(sumWithInitial); */
+function sumaRetorno(array, propiedad) {
+  let valorInicial = {
+    categoria: "",
+    ganancia: 0,
+    capacity: 0,
+    [propiedad]: 0
+  }
+  let estadisticas = array.reduce((e1, e2) => {
+    return {
+      categoria: e2.category,
+      ganancia: e1.ganancia + e2.ganancia,
+      capacity: e1.capacity + e2.capacity,
+      [propiedad]: e1[propiedad] + e2[propiedad]
+    }
+  }, valorInicial)
+  estadisticas.promedio = (100 * estadisticas[propiedad] / estadisticas.capacity).toFixed(2)
+  return estadisticas
+}
