@@ -1,7 +1,7 @@
 const tarjetaDetails = document.getElementById(`tarjeta-details`);
 
 function impTarjetaDetails(array, contenedor) {
-    contenedor.innerHTML = `
+  contenedor.innerHTML = `
       <div class="container d-flex justify-content-between gap-5">
     <img class="imagen col-5" src="${array.image}" alt="${array.name}">
     <div class="text-light">
@@ -17,26 +17,26 @@ function impTarjetaDetails(array, contenedor) {
     </div>
   </div>
   `;
-  };
+}
 
-let fecha
+let fecha;
 let eventos;
-fetch('https://mh-amazing.herokuapp.com/amazing')
-  .then(data => data.json())
-  .then(data => {
+fetch("https://mh-amazing.herokuapp.com/amazing")
+  .then((data) => data.json())
+  .then((data) => {
     eventos = data.events;
-      eventos = data.events;
-      infoEventos()
-    })
-.catch( err => console.log(err));
+    fecha = data.date;
+    infoEventos();
+  })
+  .catch((err) => console.log(err));
 
 function infoEventos() {
   let arrFiltro = [];
   let id = location.search.slice(4);
-  arrFiltro = eventos.find(element => element.id === id);
- if (arrFiltro.date < fecha) {
-  impTarjetaDetails(arrFiltro, tarjetaDetails);
- }else{
-  impTarjetaDetails(arrFiltro, tarjetaDetails);
-}
+  arrFiltro = eventos.find((element) => element.id === id);
+  if (arrFiltro.date < fecha) {
+    impTarjetaDetails(arrFiltro, tarjetaDetails);
+  } else {
+    impTarjetaDetails(arrFiltro, tarjetaDetails);
+  }
 }
