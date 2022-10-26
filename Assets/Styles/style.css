@@ -1,0 +1,9 @@
+.imagen{
+object-fit: contain;
+
+}
+
+.contenedor{
+border: #414242 solid 5px ;
+border-radius: 20px;
+}
