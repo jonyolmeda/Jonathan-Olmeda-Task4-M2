@@ -27,7 +27,7 @@ function crearCheckbox(array, contenedor) {
 
 function crearTajeta(array) {
   let div = document.createElement(`DIV`);
-  div.classList = "card col-3 bg-black";
+  div.classList = "card d-flex col-3 bg-black";
   div.innerHTML += `
       <div class="card-body">
           <p class="card-text text-light">${array.name}</p>
